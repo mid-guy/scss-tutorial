@@ -1,0 +1,74 @@
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+$spaces: ( 0, 5, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 );
+$sides: ( top, bottom, left, right, x, y, '' );
+
+@each $space in $spaces {
+  @each $side in $sides {
+    @if $side == '' {
+      .m-#{$space} {
+        margin: #{$space}px;
+      }
+      .p-#{$space} {
+        padding: #{$space}px;
+      }
+    }
+    @else {
+      @if $side == x {
+        .mx-#{$space} {
+          margin-left: #{$space}px;
+          margin-right: #{$space}px;
+        }
+        .px-#{$space} {
+          padding-left: #{$space}px;
+          padding-right: #{$space}px;
+        }
+      }
+      @if $side == y {
+        .my-#{$space} {
+          margin-top: #{$space}px;
+          margin-bottom: #{$space}px;
+        }
+        .py-#{$space} {
+          padding-left: #{$space}px;
+          padding-right: #{$space}px;
+        }
+      }
+      @else {
+        .m#{str-slice($side, 0, 1)}-#{$space} {
+          margin-#{$side}: #{$space}px;
+        }
+        .p#{str-slice($side, 0, 1)}-#{$space} {
+          padding-#{$side}: #{$space}px;
+        }
+      }
+    }
+  }
+}
+
+$justify-contents: ( flex-start, flex-end, center, space-between, space-around, space-evenly );
+
+@mixin display-flex {
+  display: flex;
+}
+@each $space in $spaces { 
+  .gap-#{$space} {
+    gap: #{$space}px;
+  }
+}
+
+@each $justify-content in $justify-contents {
+  .flex-#{$justify-content} {
+    @include display-flex;
+    justify-content: #{$justify-content}
+  }
+};
